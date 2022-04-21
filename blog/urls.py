@@ -18,4 +18,6 @@ urlpatterns = [
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     # http://localhost:8000/blog/comment/2/remove
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
+    path('regist/',views.register_user, name='register_user'),
+
 ]

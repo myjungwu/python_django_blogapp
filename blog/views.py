@@ -3,8 +3,22 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth.models import User
+
 from .models import Post, Comment
 from .forms import PostModelForm, PostForm, CommentModelForm
+
+def register_user(request):
+    if(request.method == 'POST'): 
+        new_user=User.objects.create_user(
+            username=request.POST['name'],
+            password=request.POST['pass'],
+            email = request.POST['email']
+        )
+        new_user.save()
+        return redirect('post_list_home')
+    return render(request, 'registration/register.html')
+
 
 # 댓글승인
 @login_required
